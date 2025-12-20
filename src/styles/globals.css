@@ -11,5 +11,30 @@
   --color-k-light-black: #2c2c2c;
   --color-k-brown: #8b4513;
   --color-k-green: #6b8e23;
-  --color-k-dark-yellow: #ffd700;
+  --color-k-yellow: #ffd700;
+}
+
+@keyframes fly-and-fade {
+  0% {
+    opacity: 1;
+    transform: translate(1, 5) scale(1);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(calc(var(--fly-x) * 0.5), var(--fly-y-peak)) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--fly-x), var(--fly-y-end)) scale(0.8);
+  }
+}
+
+.animate-fly-and-fade {
+  display: inline-block;
+  animation-name: fly-and-fade;
+  animation-duration: 2.0s; /* 時間を忘れずに追加 */
+  animation-timing-function: cubic-bezier(1.25, 0.46, 1.45, 0.94);
+  animation-fill-mode: forwards;
+  --fly-y-peak: -50px;
+  --fly-y-end: 150px;
 }
