@@ -2,12 +2,11 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
-
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
-  title: "Kinga 学習プロジェクト",
-  description: "Next.js App Routerの学習用プロジェクト",
+  title: "Kinga!!!",
+  description: "2026年幕開けに必須なアプリ!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -20,7 +19,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geist.variable}`}>
+    <html lang="ja">
       <body>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
