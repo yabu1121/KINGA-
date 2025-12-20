@@ -13,6 +13,21 @@
   --color-k-green: #6b8e23;
   --color-k-yellow: #ffd700;
 }
+@import "tailwindcss";
+
+@theme {
+  --color-k-light-red: #e34234;
+  --color-k-red: #dc143c;
+  --color-k-dark-red: #a52a2a;
+  --color-k-light-white: #ffffe0;
+  --color-k-white: #fffafa;
+  --color-k-dark-white: #f8f8ff;
+  --color-k-black: #000000;
+  --color-k-light-black: #2c2c2c;
+  --color-k-brown: #8b4513;
+  --color-k-green: #6b8e23;
+  --color-k-yellow: #ffd700;
+}
 
 @keyframes fly-and-fade {
   0% {
