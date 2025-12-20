@@ -1,5 +1,5 @@
 import "~/styles/globals.css";
-
+import { Toaster } from "sonner";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
@@ -19,7 +19,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja" className={geist.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster position="bottom-center" richColors/>
+      </body>
     </html>
   );
 }

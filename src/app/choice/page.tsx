@@ -39,12 +39,17 @@ const ChoicePage = () => {
               </tbody>
             </table>
           </div>
-          <Link href="/game" 
-            className="bg-k-light-black text-k-light-white w-200 rounded-2xl text-center block mx-auto mb-10"
-          >スタート</Link>
-          <Link href="/ranking"
-            className="px-4 py-2 rounded-2xl bg-k-brown text-k-dark-white"
-          >ランキングをもっと見る</Link>
+          <div className="flex flex-col items-center gap-4">
+            <Link href="/game" 
+              className="px-4 py-2 bg-k-brown text-k-light-white rounded-2xl"
+            >スタート</Link>
+            <Link href="/ranking"
+              className="px-4 py-2 rounded-2xl bg-k-brown text-k-light-white"
+            >ランキングをもっと見る</Link>
+            <Link href="/howto"
+              className="px-4 py-2 rounded-2xl bg-k-brown text-k-light-white"
+            >遊び方を見る</Link>
+          </div>
         </div>
       </div>
     </div>
