@@ -1,39 +1,43 @@
 import { z } from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
-import { posts } from "~/server/db/schema";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
+/**
+ * postRouter: 投稿に関するAPIエンドポイント
+ * 
+ * tRPCのルーターとプロシージャの基本的な使い方の例です
+ */
 export const postRouter = createTRPCRouter({
+  /**
+   * hello: シンプルなクエリプロシージャの例
+   * 
+   * - publicProcedure: 認証不要のプロシージャ
+   * - input: zodスキーマでinputの型を定義
+   * - query: データを取得する処理（副作用なし）
+   */
   hello: publicProcedure
     .input(z.object({ text: z.string() }))
     .query(({ input }) => {
       return {
-        greeting: `Hello ${input.text}`,
+        greeting: `こんにちは、${input.text}！`,
       };
     }),
 
-  create: protectedProcedure
-    .input(z.object({ name: z.string().min(1) }))
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(posts).values({
-        name: input.name,
-        createdById: ctx.session.user.id,
-      });
-    }),
-
-  getLatest: protectedProcedure.query(async ({ ctx }) => {
-    const post = await ctx.db.query.posts.findFirst({
-      orderBy: (posts, { desc }) => [desc(posts.createdAt)],
-    });
-
-    return post ?? null;
-  }),
-
-  getSecretMessage: protectedProcedure.query(() => {
-    return "you can now see this secret message!";
-  }),
+  /**
+   * ここに独自のプロシージャを追加できます
+   * 
+   * 例1: mutationプロシージャ（データの作成・更新・削除）
+   * create: publicProcedure
+   *   .input(z.object({ name: z.string().min(1) }))
+   *   .mutation(async ({ input }) => {
+   *     // データを保存する処理
+   *     return { success: true, name: input.name };
+   *   }),
+   * 
+   * 例2: 複雑なクエリ
+   * getAll: publicProcedure.query(() => {
+   *   // データベースから全データを取得
+   *   return [{ id: 1, name: "Example" }];
+   * }),
+   */
 });
