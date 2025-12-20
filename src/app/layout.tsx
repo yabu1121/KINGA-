@@ -2,7 +2,6 @@ import "~/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
-import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "Kinga!!!",
@@ -19,10 +18,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ja">
-      <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
-      </body>
+    <html lang="ja" className={geist.variable}>
+      <body>{children}</body>
     </html>
   );
 }
