@@ -7,14 +7,14 @@ import { toast } from "sonner"
 const ResultPage = () => {
 
   const handleShare = () => {
-    const text = `kinga!!-アソバナイと新年が始まらないアプリ-で${disp}円獲得しました！#お年玉ゲーム #kinga`;
+    const text = `kinga!!-アソバナイと新年が始まらないアプリ-で${disp}円のお年玉をもらうことができました！#お年玉ゲーム #kinga`;
     const url = window.location.href; 
     const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(xUrl, '_blank');
   };
 
   const handleLineShare = () => {
-    const text = `kinga!!で ${disp}円 獲得しました！\nアソバナイと新年が始まらないアプリ！`;
+    const text = `kinga!!で ${disp}円円のお年玉をもらうことができました！\nアソバナイと新年が始まらないアプリ！`;
     const url = window.location.href;
     const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + "\n" + url)}`;
     window.open(lineUrl, '_blank');

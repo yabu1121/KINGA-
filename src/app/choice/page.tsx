@@ -49,6 +49,9 @@ const ChoicePage = () => {
             <Link href="/howto"
               className="px-4 py-2 rounded-2xl bg-k-brown text-k-light-white"
             >遊び方を見る</Link>
+            <Link href="/login"
+              className="px-4 py-2 rounded-2xl bg-blue-500 text-k-white"
+            >ログイン</Link>
           </div>
         </div>
       </div>
