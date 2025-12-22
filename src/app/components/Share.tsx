@@ -13,14 +13,28 @@ const Share = ({titleText}:ShareProps) => {
   const disp = Number(yen).toLocaleString();
   
   const handleShare = () => {
-    const text = `kinga!!-アソバナイと新年が始まらないアプリ-で${disp}円のお年玉をもらうことができました！#お年玉ゲーム #kinga`;
+    const text = `君もkingaで遊ぼう!!\nアソバナイと新年が始まらないアプリ！#お年玉ゲーム #kinga`;
     const url = window.location.href; 
     const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(xUrl, '_blank');
   };
 
   const handleLineShare = () => {
-    const text = `kinga!!で ${disp}円円のお年玉をもらうことができました！\nアソバナイと新年が始まらないアプリ！`;
+    const text = `君もkinga!!で遊ぼう!!\nアソバナイと新年が始まらないアプリ！`;
+    const url = window.location.href;
+    const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + "\n" + url)}`;
+    window.open(lineUrl, '_blank');
+  };
+
+  const handleResultShare = () => {
+    const text = `kinga!!-アソバナイと新年が始まらないアプリ-で${disp}円のお年玉をもらうことができました！#お年玉ゲーム #kinga`;
+    const url = window.location.href; 
+    const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    window.open(xUrl, '_blank');
+  };
+
+  const handleResultLineShare = () => {
+    const text = `kinga!!で ${disp}円のお年玉をもらうことができました！\nアソバナイと新年が始まらないアプリ！`;
     const url = window.location.href;
     const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + "\n" + url)}`;
     window.open(lineUrl, '_blank');
@@ -60,14 +74,14 @@ const Share = ({titleText}:ShareProps) => {
               <h2 className="text-xl font-bold mb-2">{titleText}</h2>
   
               <button 
-                onClick={handleShare}
+                onClick={titleText === "結果を自慢しよう!" ? handleResultShare : handleShare}
                 className="w-full py-3 bg-black text-white rounded-xl font-bold hover:opacity-90"
               >
                 X (Twitter) で自慢する
               </button>
   
               <button 
-                onClick={handleLineShare}
+                onClick={titleText === "結果を自慢しよう!" ? handleResultLineShare : handleLineShare}
                 className="w-full py-3 bg-[#06C755] text-white rounded-xl font-bold hover:opacity-90"
               >
                 LINE で自慢する

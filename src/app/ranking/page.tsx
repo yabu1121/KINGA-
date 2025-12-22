@@ -7,7 +7,6 @@ import Link from 'next/link'
 const RankingPage = () => {
   const { data, isLoading, error } = api.ranking.getAllRanking.useQuery()
 
-  // 読み込み中のスケルトン表示（UX向上）
   if (isLoading) {
     return (
       <div className="min-h-screen bg-k-light-white flex flex-col items-center p-8">
@@ -35,7 +34,6 @@ const RankingPage = () => {
   return (
     <div className="min-h-screen bg-k-dark-white flex flex-col items-center p-6 sm:p-12 font-sans">
       
-      {/* ページヘッダー */}
       <div className="mb-10 text-center">
         <h1 className="text-4xl font-black text-k-brown flex items-center gap-3">
           <span className="text-k-red">🏮</span>
@@ -45,7 +43,6 @@ const RankingPage = () => {
         <p className="text-k-brown/60 text-sm mt-2 font-bold tracking-widest">RANKING BOARD</p>
       </div>
 
-      {/* ランキングリスト */}
       <div className="w-full max-w-xl bg-k-white rounded-[2rem] shadow-xl border-2 border-k-brown p-2">
         <div className="bg-k-dark-white rounded-[1.8rem] border border-dashed border-k-brown/20">
           <ul className="divide-y divide-k-brown/10">
@@ -65,13 +62,11 @@ const RankingPage = () => {
                     {index + 1}
                   </span>
                   
-                  {/* 名前 */}
                   <span className="text-xl font-bold text-k-light-black">
                     {item.name}
                   </span>
                 </div>
 
-                {/* スコア */}
                 <div className="text-right">
                   <span className="text-2xl font-black text-k-red tracking-tight">
                     {item.score.toLocaleString()}
@@ -90,7 +85,6 @@ const RankingPage = () => {
         </div>
       </div>
 
-      {/* 戻るボタン */}
       <Link 
         href="/choice" 
         className="mt-12 px-8 py-3 bg-k-brown text-k-light-white font-bold rounded-full hover:bg-k-light-black transition-all active:scale-95 shadow-lg"

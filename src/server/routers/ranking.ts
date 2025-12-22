@@ -4,6 +4,7 @@ import { ranking } from "~/db/schema";
 import z from "zod";
 
 export const RankingRouter = router({
+  
   getAllRanking: publicProcedure.query(async ({ ctx }) => {
     const { db } = ctx;
     return await db
@@ -23,6 +24,7 @@ export const RankingRouter = router({
       .orderBy(desc(ranking.score))
       .limit(5);
   }),
+
   postScore: publicProcedure
   .input(
     z.object({
