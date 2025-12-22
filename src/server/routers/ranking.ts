@@ -1,8 +1,7 @@
-// 'use client' は不要です（サーバー側で動くコードのため）
-
 import { desc, gte } from "drizzle-orm";
 import { publicProcedure, router } from "../trpc";
 import { ranking } from "~/db/schema";
+import z from "zod";
 
 export const RankingRouter = router({
   getAllRanking: publicProcedure.query(async ({ ctx }) => {
@@ -23,5 +22,22 @@ export const RankingRouter = router({
       .where(gte(ranking.created_at, today)) 
       .orderBy(desc(ranking.score))
       .limit(5);
+  }),
+  postScore: publicProcedure
+  .input(
+    z.object({
+      name: z.string().min(1, "名前を入力してください"),
+      score: z.number().nonnegative(), // nonnegative: 非負
+    })
+  )
+  .mutation( async ({ctx, input}) => {
+    const { db } = ctx;
+    await db
+    .insert(ranking)
+    .values({
+      name: input.name,
+      score: input.score,
+    });
+    return { success: true, message: "ランキングに登録しました。"}
   })
 });

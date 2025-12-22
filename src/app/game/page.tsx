@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner";
 
 interface Coordinate {
   x: number;
@@ -90,8 +91,10 @@ const GamePage = () => {
     }
 
     if(status == "finished"){
-      alert("終了!!");
-      router.push(`/game/result/${yen}`);
+      toast("終了!!");
+      setTimeout(() => {
+        router.push(`/game/result/${yen}`);
+      }, 2000);
     }
   }, [status]);
 
@@ -115,8 +118,8 @@ const GamePage = () => {
     className="border flex flex-col min-h-screen items-center justify-center relative"
     id="screen"
     >
-      {/* {mousePosition.x} : {mousePosition.y} */}
       <div className="relative">
+        <h1 className="text-center text-2xl mb-10">残り : {timeLeft} 秒</h1>
         <h2>\{yen.toLocaleString()}</h2>
         <button 
           onClick={handleClick}
