@@ -1,7 +1,15 @@
 import { ZodError } from "zod"
+import { initTRPC } from "@trpc/server";
+import { db } from "~/db";
 
+export const createTRPCContext = () => {
+  return {
+    db,
+  }
+}
+type Context = Awaited<ReturnType<typeof createTRPCContext>>
 
-const t = initTRPC.create({
+const t = initTRPC.context<Context>().create({
   errorFormatter({ shape, error }){
     return {
       ...shape,
