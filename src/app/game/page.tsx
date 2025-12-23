@@ -3,6 +3,7 @@ import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner";
+import { useGameStore } from "~/store/useGameStore";
 
 interface Coordinate {
   x: number;
@@ -18,14 +19,16 @@ interface PopupData {
 }
 
 const GamePage = () => {
+  const { setResult } = useGameStore();
   const [yen, setYen] = useState(0);
+  const [totalClicks, setTotalClicks] = useState(0);
   const [isLean, setIsLean] = useState(false);
-  const [mousePosition, setMousePosition] = useState<Coordinate>({x: 0, y: 0});
+  const [mousePosition, setMousePosition] = useState<Coordinate>({ x: 0, y: 0 });
   const [popups, setPopups] = useState<PopupData[]>([]);
   const [status, setStatus] = useState("ready");
   const [timeLeft, setTimeLeft] = useState(10);
   const [countdown, setCountdown] = useState(3);
-  const boxRef = useRef(null);
+  const boxRef = useRef<HTMLButtonElement>(null);
   const router = useRouter();
 
   const getRandomAmount = () => {
@@ -41,9 +44,10 @@ const GamePage = () => {
   };
 
   const handleClick = () => {
-    if(status != "playing")return;
-    const currentAmount = getRandomAmount(); 
+    if (status != "playing") return;
+    const currentAmount = getRandomAmount();
     setYen((state) => (state + currentAmount));
+    setTotalClicks((prev) => prev + 1);
     setIsLean((state) => !state);
 
     const newPopup = {
@@ -62,12 +66,11 @@ const GamePage = () => {
 
   useEffect(() => {
     if (status === 'ready') {
-      // 3秒間のカウントダウン処理
       const timer = setInterval(() => {
         setCountdown((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            setStatus('playing'); // 0になったらゲーム開始
+            setStatus('playing'); 
             return 0;
           }
           return prev - 1;
@@ -77,12 +80,11 @@ const GamePage = () => {
     }
 
     if (status === 'playing') {
-      // 10秒間のゲームタイマー処理
       const timer = setInterval(() => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            setStatus('finished'); // 0になったらゲーム終了
+            setStatus('finished'); 
           }
           return prev - 1;
         });
@@ -90,67 +92,69 @@ const GamePage = () => {
       return () => clearInterval(timer);
     }
 
-    if(status == "finished"){
+    if (status == "finished") {
       toast("終了!!");
+      setResult(yen, totalClicks);
       setTimeout(() => {
-        router.push(`/game/result/${yen}`);
+        router.push('/game/result');
       }, 2000);
     }
   }, [status]);
 
 
   useEffect(() => {
-    const mouseMoveListener = (event) => {
+    const mouseMoveListener = (event: MouseEvent) => {
       const rect = boxRef.current?.getBoundingClientRect();
-      setMousePosition({ 
-        x: Math.floor(event.clientX - rect.left), 
+      if (!rect) return;
+      setMousePosition({
+        x: Math.floor(event.clientX - rect.left),
         y: Math.floor(event.clientY - rect.top),
       });
     };
     window.addEventListener("mousemove", mouseMoveListener);
     return () => {
-    window.removeEventListener("mousemove", mouseMoveListener);
+      window.removeEventListener("mousemove", mouseMoveListener);
     };
   }, []);
 
   return (
-    <div 
-    className="border flex flex-col min-h-screen items-center justify-center relative"
-    id="screen"
+    <div
+      className="border flex flex-col min-h-screen items-center justify-center relative"
+      id="screen"
     >
       <div className="relative">
-        <h1 className="text-center text-2xl mb-10">残り : {timeLeft} 秒</h1>
-        <h2>\{yen.toLocaleString()}</h2>
-        <button 
+        <h1 className={`text-center text-2xl mb-10 pointer-events-none select-none ${timeLeft === 1 ? "text-k-light-red" : ""}`}>残り : {timeLeft} 秒</h1>
+        <h2 className="pointer-events-none select-none ">\{yen.toLocaleString()}</h2>
+        <button
           onClick={handleClick}
           id="pochi"
           ref={boxRef}
-          >
-          <Image 
+        >
+          <Image
             src="/image/otoshidama.png"
             alt="ポチ袋の画像"
             width={2000}
             height={2000}
-            className={`w-72 h-72 transition-all duration-75 ${isLean ? "rotate-12" : "-rotate-12"}`}
-            />
+            className={`w-72 h-72 transition-all duration-75 pointer-events-none select-none ${isLean ? "rotate-12" : "-rotate-12"}`}
+          />
           {popups.map((popup) => (
             <span
               key={popup.id}
-              className={`absolute text-2xl font-bold pointer-events-none animate-fly-and-fade ${popup.amount == 2000 ? "text-3xl text-k-yellow": "text-k-light-red"}`}
-              style={{ 
-                left: popup.x, 
-                top: popup.y-20,
-                '--fly-x': popup.flyX 
-              }}
+              className={`absolute text-2xl font-bold pointer-events-none select-none  animate-fly-and-fade ${popup.amount == 2000 ? "text-3xl text-k-yellow" : "text-k-light-red"}`}
+              style={{
+                left: popup.x,
+                top: popup.y - 20,
+                '--fly-x': popup.flyX
+              } as React.CSSProperties}
             >
               +{popup.amount}
             </span>
           ))}
         </button>
-        <p className="text-center text-k-red font-bold text-3xl mt-20 animate-bounce">ポチ袋を連打!!!</p>
+        <p className="text-center text-k-red font-bold text-3xl mt-20 animate-bounce pointer-events-none select-none ">ポチ袋を連打!!!</p>
       </div>
       {status == "ready" && <span className="w-screen h-screen bg-k-light-black absolute opacity-90 flex justify-center items-center">
-        <p className="text-k-dark-white text-9xl font-bold mb-20">{countdown}</p>  
+        <p className="text-k-dark-white text-9xl font-bold mb-20 pointer-events-none select-none">{countdown}</p>
       </span>}
     </div>
   )
