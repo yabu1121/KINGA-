@@ -46,7 +46,7 @@ const RankingPage = () => {
     <div className="min-h-screen bg-k-dark-white flex flex-col items-center p-6 sm:p-12 font-sans relative">
       <Image
         src="/image/horse.png"
-        alt="富士山のイラスト"
+        alt="うまのイラスト"
         width={400}
         height={400}
         className="absolute top-100 left-20 z-0"
@@ -109,7 +109,7 @@ const RankingPage = () => {
 
       <Link
         href="/choice"
-        className="mt-12 px-8 py-3 bg-k-brown text-k-light-white font-bold rounded-full hover:bg-k-light-black transition-all active:scale-95 shadow-lg"
+        className="mt-12 z-10　px-8 py-3 bg-k-brown text-k-light-white font-bold rounded-full hover:bg-k-light-black transition-all active:scale-95 shadow-lg"
       >
         戻る
       </Link>
