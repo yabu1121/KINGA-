@@ -70,7 +70,7 @@ const GamePage = () => {
         setCountdown((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            setStatus('playing'); 
+            setStatus('playing');
             return 0;
           }
           return prev - 1;
@@ -84,7 +84,7 @@ const GamePage = () => {
         setTimeLeft((prev) => {
           if (prev <= 1) {
             clearInterval(timer);
-            setStatus('finished'); 
+            setStatus('finished');
           }
           return prev - 1;
         });
@@ -99,7 +99,7 @@ const GamePage = () => {
         router.push('/game/result');
       }, 2000);
     }
-  }, [status]);
+  }, [status, router, setResult, yen, totalClicks]);
 
 
   useEffect(() => {

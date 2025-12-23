@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation"
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { toast } from "sonner"
 import Share from "~/app/components/Share";
 import { api } from "~/trpc/client";
@@ -9,7 +9,7 @@ import { useGameStore } from "~/store/useGameStore";
 
 const ResultPage = () => {
   const router = useRouter();
-  const { score, clickCount } = useGameStore();
+  const { score } = useGameStore();
   const disp = score.toLocaleString();
 
   const formNameRef = useRef<HTMLInputElement>(null);

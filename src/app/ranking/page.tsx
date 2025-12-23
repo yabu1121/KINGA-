@@ -13,7 +13,7 @@ const RankingPage = () => {
       <div className="min-h-screen bg-k-light-white flex flex-col items-center p-8">
         <div className="w-full max-w-md animate-pulse">
           <div className="h-10 bg-k-brown/20 rounded-lg mb-8" />
-          {[...Array(5)].map((_, i) => (
+          {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="h-16 bg-k-white rounded-xl mb-3" />
           ))}
         </div>
