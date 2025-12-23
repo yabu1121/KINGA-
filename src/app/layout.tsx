@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     siteName: "Kinga!!!",
     images: [
       {
-        url: "/favicon.ico", 
+        url: "public/favicon.ico", 
         width: 1200,
         height: 630,
         alt: "Kinga!!! 2026年幕開けアプリ",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kinga!!!",
     description: "2026年幕開けに必須なアプリ!",
-    images: ["/favicon.ico"], 
+    images: ["public/favicon.ico"], 
   },
 };
 
