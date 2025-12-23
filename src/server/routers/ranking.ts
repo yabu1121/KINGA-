@@ -29,7 +29,7 @@ export const RankingRouter = router({
   .input(
     z.object({
       name: z.string().min(1, "名前を入力してください"),
-      score: z.number().nonnegative(), // nonnegative: 非負
+      score: z.number().nonnegative(),
     })
   )
   .mutation( async ({ctx, input}) => {
