@@ -13,34 +13,36 @@ const Share = ({ titleText, score = 0 }: ShareProps) => {
 
   const handleShare = () => {
     const text = `君もkingaで遊ぼう!!\nアソバナイと新年が始まらないアプリ！#お年玉ゲーム #kinga`;
-    const url = window.location.href;
+    const url = "https://www.kinga-x41k.vercel.app";
     const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(xUrl, '_blank');
   };
 
   const handleLineShare = () => {
     const text = `君もkinga!!で遊ぼう!!\nアソバナイと新年が始まらないアプリ！`;
-    const url = window.location.href;
+    const url = "https://www.kinga-x41k.vercel.app";
+
     const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + "\n" + url)}`;
     window.open(lineUrl, '_blank');
   };
 
   const handleResultShare = () => {
     const text = `kinga!!-アソバナイと新年が始まらないアプリ-で${disp}円のお年玉をもらうことができました！#お年玉ゲーム #kinga`;
-    const url = window.location.href;
+    const url = "https://www.kinga-x41k.vercel.app";
+
     const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(xUrl, '_blank');
   };
 
   const handleResultLineShare = () => {
     const text = `kinga!!で ${disp}円のお年玉をもらうことができました！\nアソバナイと新年が始まらないアプリ！`;
-    const url = window.location.href;
+    const url = "https://www.kinga-x41k.vercel.app";
     const lineUrl = `https://line.me/R/msg/text/?${encodeURIComponent(text + "\n" + url)}`;
     window.open(lineUrl, '_blank');
   };
 
   const handleCopyLink = () => {
-    const url = window.location.href;
+    const url = "https://www.kinga-x41k.vercel.app";
     navigator.clipboard.writeText(url)
       .then(() => {
         toast.success('リンクをコピーしました！', {
