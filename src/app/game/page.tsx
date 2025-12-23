@@ -99,7 +99,7 @@ const GamePage = () => {
         router.push('/game/result');
       }, 2000);
     }
-  }, [status, router, setResult, yen, totalClicks]);
+  }, [status]);
 
 
   useEffect(() => {
