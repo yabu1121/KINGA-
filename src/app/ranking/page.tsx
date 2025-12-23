@@ -32,7 +32,8 @@ const RankingPage = () => {
     )
   }
 
-  const formatDate = (isoString: string | Date) => {
+  const formatDate = (isoString: string | Date | null | undefined) => {
+    if (!isoString) return '';
     const date = new Date(isoString);
     return date.toLocaleString('ja-JP', {
       year: 'numeric',
@@ -63,20 +64,20 @@ const RankingPage = () => {
         <div className="bg-k-dark-white rounded-[1.8rem] border border-dashed border-k-brown/20">
           <ul className="divide-y divide-k-brown/10">
             {data?.map((item, index) => (
-              <li 
-                key={item.id} 
+              <li
+                key={item.id}
                 className="flex z-10 items-center justify-between p-5 hover:bg-k-light-white/50 transition-colors first:rounded-t-[1.8rem] last:rounded-b-[1.8rem]"
               >
                 <div className="flex items-center gap-4">
                   <span className={`
                     w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded-full font-black text-lg
-                    ${index === 0 ? 'bg-k-yellow text-k-brown' : 
-                      index === 1 ? 'bg-slate-300 text-slate-700' : 
-                      index === 2 ? 'bg-orange-300 text-orange-900' : 'bg-k-dark-white border border-k-brown/20 text-k-brown'}
+                    ${index === 0 ? 'bg-k-yellow text-k-brown' :
+                      index === 1 ? 'bg-slate-300 text-slate-700' :
+                        index === 2 ? 'bg-orange-300 text-orange-900' : 'bg-k-dark-white border border-k-brown/20 text-k-brown'}
                   `}>
                     {index + 1}
                   </span>
-                  
+
                   <span className="md:text-xl font-bold text-k-light-black">
                     {item.name}
                   </span>
@@ -106,8 +107,8 @@ const RankingPage = () => {
         </div>
       </div>
 
-      <Link 
-        href="/choice" 
+      <Link
+        href="/choice"
         className="mt-12 px-8 py-3 bg-k-brown text-k-light-white font-bold rounded-full hover:bg-k-light-black transition-all active:scale-95 shadow-lg"
       >
         戻る
