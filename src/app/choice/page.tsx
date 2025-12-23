@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import RankingSection from "../components/RankingSection"
+import Image from "next/image"
 
 const ChoicePage = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-k-dark-white p-4 font-sans">      
+    <div className="min-h-screen flex flex-col items-center justify-center bg-k-dark-white p-4 font-sans relative">      
       <div className="w-full max-w-lg bg-k-white rounded-[2.5rem] shadow-2xl border-b-8 border-k-brown/20 overflow-hidden">
         <div className="p-8 bg-k-light-white border-b-2 border-dashed border-k-brown/10">
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -13,7 +14,13 @@ const ChoicePage = () => {
             <h2 className="text-k-brown font-black text-xl tracking-widest">ランキング</h2>
             <span className="text-k-red text-xl">◆</span>
           </div>
-          
+          <Image 
+            src="/image/fuji.png"
+            alt="富士山のイラスト"
+            width={400}
+            height={400}
+            className="absolute top-140 right-30 z-0"
+          />
           <div className="bg-white rounded-2xl p-4 shadow-inner min-h-50">
             <RankingSection />
           </div>
@@ -31,13 +38,13 @@ const ChoicePage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <Link 
               href="/ranking"
-              className="flex items-center justify-center px-4 py-3 bg-k-brown text-k-light-white font-bold rounded-xl hover:bg-k-light-black transition-colors"
+              className="flex items-center z-10 justify-center px-4 py-3 bg-k-brown text-k-light-white font-bold rounded-xl hover:bg-k-light-black transition-colors"
             >
               ランキングをもっと見る
             </Link>
             <Link 
               href="/howto"
-              className="flex items-center justify-center px-4 py-3 bg-k-brown text-k-light-white font-bold rounded-xl hover:bg-k-light-black transition-colors"
+              className="flex items-center justify-center z-10 px-4 py-3 bg-k-brown text-k-light-white font-bold rounded-xl hover:bg-k-light-black transition-colors"
             >
               遊び方
             </Link>

@@ -3,6 +3,7 @@
 import React from 'react'
 import { api } from '~/trpc/client'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const RankingPage = () => {
   const { data, isLoading, error } = api.ranking.getAllRanking.useQuery()
@@ -41,8 +42,14 @@ const RankingPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-k-dark-white flex flex-col items-center p-6 sm:p-12 font-sans">
-      
+    <div className="min-h-screen bg-k-dark-white flex flex-col items-center p-6 sm:p-12 font-sans relative">
+      <Image
+        src="/image/horse.png"
+        alt="富士山のイラスト"
+        width={400}
+        height={400}
+        className="absolute top-100 left-20 z-0"
+      />
       <div className="mb-10 text-center">
         <h1 className="text-2xl md:text-4xl font-black text-k-brown flex items-center gap-3">
           <span className="text-k-red">🏮</span>
@@ -58,7 +65,7 @@ const RankingPage = () => {
             {data?.map((item, index) => (
               <li 
                 key={item.id} 
-                className="flex items-center justify-between p-5 hover:bg-k-light-white/50 transition-colors first:rounded-t-[1.8rem] last:rounded-b-[1.8rem]"
+                className="flex z-10 items-center justify-between p-5 hover:bg-k-light-white/50 transition-colors first:rounded-t-[1.8rem] last:rounded-b-[1.8rem]"
               >
                 <div className="flex items-center gap-4">
                   <span className={`
