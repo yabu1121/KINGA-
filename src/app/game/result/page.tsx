@@ -74,7 +74,7 @@ const ResultPage = () => {
         </form>
 
         <div className="w-full bg-k-dark-white p-6 border-t-2 border-dashed border-k-brown/30 flex flex-col items-center gap-4">
-          <Share titleText="結果を自慢しよう!" />
+          <Share titleText="結果を自慢しよう!" score={score} />
           <button
             onClick={() => router.push("/game")}
             className="text-sm font-bold text-k-brown hover:text-k-red transition-colors flex items-center gap-1"

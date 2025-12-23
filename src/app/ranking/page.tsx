@@ -31,11 +31,20 @@ const RankingPage = () => {
     )
   }
 
+  const formatDate = (isoString: string | Date) => {
+    const date = new Date(isoString);
+    return date.toLocaleString('ja-JP', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    });
+  }
+
   return (
     <div className="min-h-screen bg-k-dark-white flex flex-col items-center p-6 sm:p-12 font-sans">
       
       <div className="mb-10 text-center">
-        <h1 className="text-4xl font-black text-k-brown flex items-center gap-3">
+        <h1 className="text-2xl md:text-4xl font-black text-k-brown flex items-center gap-3">
           <span className="text-k-red">🏮</span>
           Kinga ランキング表
           <span className="text-k-red">🏮</span>
@@ -43,7 +52,7 @@ const RankingPage = () => {
         <p className="text-k-brown/60 text-sm mt-2 font-bold tracking-widest">RANKING BOARD</p>
       </div>
 
-      <div className="w-full max-w-xl bg-k-white rounded-[2rem] shadow-xl border-2 border-k-brown p-2">
+      <div className="w-full max-w-xl bg-k-white rounded-4xl shadow-xl border-2 border-k-brown p-2">
         <div className="bg-k-dark-white rounded-[1.8rem] border border-dashed border-k-brown/20">
           <ul className="divide-y divide-k-brown/10">
             {data?.map((item, index) => (
@@ -52,9 +61,8 @@ const RankingPage = () => {
                 className="flex items-center justify-between p-5 hover:bg-k-light-white/50 transition-colors first:rounded-t-[1.8rem] last:rounded-b-[1.8rem]"
               >
                 <div className="flex items-center gap-4">
-                  {/* 順位バッジ */}
                   <span className={`
-                    w-10 h-10 flex items-center justify-center rounded-full font-black text-lg
+                    w-5 h-5 md:w-10 md:h-10 flex items-center justify-center rounded-full font-black text-lg
                     ${index === 0 ? 'bg-k-yellow text-k-brown' : 
                       index === 1 ? 'bg-slate-300 text-slate-700' : 
                       index === 2 ? 'bg-orange-300 text-orange-900' : 'bg-k-dark-white border border-k-brown/20 text-k-brown'}
@@ -62,13 +70,19 @@ const RankingPage = () => {
                     {index + 1}
                   </span>
                   
-                  <span className="text-xl font-bold text-k-light-black">
+                  <span className="md:text-xl font-bold text-k-light-black">
                     {item.name}
                   </span>
                 </div>
 
+                <div>
+                  <span className="text-sm md:text-base font-bold text-k-light-black">
+                    {formatDate(item.created_at)}
+                  </span>
+                </div>
+
                 <div className="text-right">
-                  <span className="text-2xl font-black text-k-red tracking-tight">
+                  <span className="md:text-2xl font-black text-k-red tracking-tight">
                     {item.score.toLocaleString()}
                   </span>
                   <span className="text-xs font-bold text-k-brown ml-1">円</span>
