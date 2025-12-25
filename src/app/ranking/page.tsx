@@ -109,7 +109,7 @@ const RankingPage = () => {
 
       <Link
         href="/choice"
-        className="mt-12 z-10　px-8 py-3 bg-k-brown text-k-light-white font-bold rounded-full hover:bg-k-light-black transition-all active:scale-95 shadow-lg"
+        className="mt-12 z-50 fixed bottom-20 px-8 py-3 bg-k-brown text-k-light-white font-bold rounded-full hover:bg-k-light-black transition-all active:scale-95 shadow-lg"
       >
         戻る
       </Link>
